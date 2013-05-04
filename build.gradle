@@ -1,0 +1,53 @@
+version = '0.1'
+group = 'ws.chojnacki'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'git-dependencies'
+//apply plugin: 'application'
+//
+//mainClassName = "dach.DACHApp"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.batcha.gradle.plugins:git-dependencies:0.1'
+    }
+}
+
+jar {
+    manifest.attributes("Main-Class": "dach.DACHApp")
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.+'
+  compile('ws.chojnacki:reljaxb:0.1').ext.git = 'https://github.com/pchojnacki/reljaxb.git'
+  compile 'org.jdesktop:swing-worker:1.1'
+  compile 'org.jdesktop:appframework:1.0.3'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src' 
+    }
+  }
+  test {
+    java {
+      srcDir 'test'
+    }
+  }
+}
+
+configurations {
+  compile
+}
+
