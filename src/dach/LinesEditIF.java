@@ -11,30 +11,19 @@
 package dach;
 
 import dach.renderer.DepartureListCellRender;
-import dach.renderer.DeptTableCellRenderer;
 import dach.renderer.LinesListCellRenderer;
 import dach.renderer.StopsListCellRenderer;
-import java.awt.Component;
-import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
-import javax.swing.table.DefaultTableModel;
 import org.jdesktop.application.Action;
 import ws.chojnacki.timetable.mapping.Departure;
 import ws.chojnacki.timetable.mapping.Line;
 import ws.chojnacki.timetable.mapping.Route;
 import ws.chojnacki.timetable.mapping.Stop;
 import ws.chojnacki.timetable.rxmldata.EntityFactory;
-import ws.chojnacki.timetable.rxmldata.IdentifiedEntity;
 
 /**
  *
@@ -480,7 +469,7 @@ public class LinesEditIF extends javax.swing.JInternalFrame implements DataAcces
 
     @Action
     public void editElement() {
-        for (Object object : linesList.getSelectedValues()) {
+        for (Object object : linesList.getSelectedValuesList()) {
             editedLine = (Line) object;
 
             stopsCb.setModel(new StopComboBoxModel(ef, Stop.class));
@@ -623,12 +612,11 @@ public class LinesEditIF extends javax.swing.JInternalFrame implements DataAcces
     @Action
     public void saveDeparture() {
         Departure enteredDeparture = new Departure();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         try {
-            enteredDeparture.setTime(DateFormat.getTimeInstance(DateFormat.SHORT).parse(timeTf.getText()));
+            enteredDeparture.setTime(df.parse(timeTf.getText()));
         } catch (ParseException ex) {
             System.err.println("Booboo time");
-
-        //Logger.getLogger(LinesEditIF.class.getName()).log(Level.SEVERE, null, ex);
         }
         enteredDeparture.setLegend(legendTf.getText());
         if (weekSelected) {
