@@ -7,9 +7,6 @@ package dach;
 
 import java.util.List;
 import javax.swing.AbstractListModel;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
-import ws.chojnacki.timetable.mapping.Departure;
 
 /**
  *
