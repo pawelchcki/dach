@@ -6,6 +6,7 @@ package dach.renderer;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -29,7 +30,8 @@ public class DepartureListCellRender extends JLabel implements ListCellRenderer 
             setText(value.toString());
         } else {
             Departure dept = (Departure) value;
-            setText(dept.getTime().getHours() + ":" + dept.getTime().getMinutes() + dept.getLegend());
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+            setText(df.format(dept.getTime()) + dept.getLegend());
         }
         if (isSelected) {
             setBackground(Color.RED);

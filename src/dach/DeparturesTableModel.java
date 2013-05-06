@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import ws.chojnacki.timetable.mapping.Departure;
 import ws.chojnacki.timetable.rxmldata.EntityFactory;
