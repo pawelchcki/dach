@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet href="../timetable.xsl" type="text/xsl"?>
 <timetable>
-    <line name="Trasa 11" id="1">
+    <line name="Tramwaj 1" id="2">
+        <route>
+	  <stop id="3"/>
+	  <stop id="4"/>
+	</route>
+	<departures-week>
+	  <departure time ="11:00"/>
+	</departures-week>
+    </line>
+    <line name="Autobus 11" id="1">
         <route>
             <stop id="0"/>
             <stop id="1"/>
