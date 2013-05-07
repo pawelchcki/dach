@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="timetable.xsl" type="text/xsl"?>
+<timetable>
+    <line name="Trasa 11" id="1">
+        <route>
+            <stop id="0"/>
+            <stop id="1"/>
+            <stop id="2"/>
+            <stop id="3"/>
+            <stop id="4"/>
+            <stop id="5"/>
+        </route>
+        <departures-week>
+            <departure legend="" time="12:00"/>
+            <departure legend="" time="13:00"/>
+            <departure legend="" time="14:00"/>
+            <departure legend="" time="15:00"/>
+            <departure legend="" time="16:00"/>
+        </departures-week>
+        <departures-saturday>
+            <departure legend="" time="11:00"/>
+            <departure legend="" time="12:00"/>
+            <departure legend="" time="12:10"/>
+            <departure legend="" time="12:20"/>
+            <departure legend="" time="12:30"/>
+            <departure legend="" time="12:40"/>
+            <departure legend="" time="12:50"/>
+        </departures-saturday>
+        <departures-holiday>
+            <departure legend="" time="02:00"/>
+            <departure legend="" time="05:00"/>
+            <departure legend="" time="11:00"/>
+            <departure legend="" time="15:00"/>
+            <departure legend="" time="18:00"/>
+        </departures-holiday>
+    </line>
+</timetable>

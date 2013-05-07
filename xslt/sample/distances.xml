@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="distances.xsl" type="text/xsl"?>
+<distances>
+    <distance from-stop="1" to-stop="2" high-traffic="1" low-traffic="1" id="0"/>
+    <distance from-stop="0" to-stop="1" high-traffic="2" low-traffic="1" id="1"/>
+    <distance from-stop="2" to-stop="3" high-traffic="4" low-traffic="2" id="2"/>
+    <distance from-stop="3" to-stop="4" high-traffic="3" low-traffic="4" id="3"/>
+    <distance from-stop="4" to-stop="5" high-traffic="80" low-traffic="70" id="4"/>
+</distances>

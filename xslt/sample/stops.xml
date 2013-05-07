@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="stops.xsl" type="text/xsl"?>
+<stops>
+    <stop name="Zawadzkiego" id="0">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Okulickiego" id="1">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Siedleckiego" id="2">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Wilenska" id="3">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Oswiecenia" id="4">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Partyzantow" id="5">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Lisia" id="6">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Piwowarska" id="7">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Jelenia" id="8">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+    <stop name="Daszynskiego" id="9">
+        <location lattitude="0.0" longitude="0.0"/>
+    </stop>
+</stops>
