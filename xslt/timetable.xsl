@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"/>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:key name="stop" match="@id" use="@name"/>
 <xsl:variable name="stops_d" select="document('stops.xml')" />
 
@@ -24,10 +24,10 @@
     <xsl:for-each select="timetable/line">
         <h2><xsl:value-of select="@name"/></h2>
          <xsl:for-each select="route/stop">
-             <!--<xsl:for-each select="$stops_d">-->
-             <!--<xsl:value-of select="count(key('stops', @id))"/>-->
-             <!--</xsl:for-each>-->
-             <xsl:text> - </xsl:text>
+             <xsl:variable name="stop_id" select="@id"/>
+             <xsl:value-of select="$stops_d//stops/stop[@id = $stop_id]/@name"/>
+
+             <xsl:text> -> </xsl:text>
          </xsl:for-each>   
     </xsl:for-each>
     <xsl:for-each select="$stops_d/stops/stop">
@@ -39,4 +39,3 @@
 </xsl:template>
 
 </xsl:stylesheet>
-
