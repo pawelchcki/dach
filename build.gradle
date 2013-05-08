@@ -13,16 +13,18 @@ buildscript {
 
 jar {
 	manifest.attributes("Main-Class": "dach.DACHApp")
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it).matching{ exclude {it.name =~ /.*(RSA|SF|eclipse.inf|about.html|jetty-dir.css|plugin.properties)/
+				} }}}
 }
 
 repositories { mavenCentral() }
 
 dependencies {
-	testCompile group: 'junit', name: 'junit', version: '4.+'
+	testCompile 'junit:junit:4+'
 	compile('ws.chojnacki:reljaxb:0.1').ext.git = 'https://github.com/pchojnacki/reljaxb.git'
 	compile 'org.jdesktop:swing-worker:1.1'
 	compile 'org.jdesktop:appframework:1.0.3'
+	compile 'org.eclipse.jetty:jetty-server:9.+'
 }
 
 sourceSets {
@@ -30,8 +32,9 @@ sourceSets {
 		java { srcDir 'src' }
 		resources { srcDir 'src' }
 	}
-	test { java { srcDir 'test' } }
+	test { java { srcDir 'test'
+		} }
 }
 
-configurations { compile }
+configurations {  compile  }
 
