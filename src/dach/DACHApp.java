@@ -37,8 +37,12 @@ public class DACHApp extends SingleFrameApplication {
 
     /**
      * Main method launching the application.
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+    	FileServer fs = new FileServer("./");
+    	fs.start();
         launch(DACHApp.class, args);
+        fs.join();
     }
 }
