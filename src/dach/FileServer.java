@@ -1,20 +1,17 @@
 package dach;
-
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
 public class FileServer extends org.eclipse.jetty.server.Server {
 	private ResourceHandler resourceHandler;
 	
-	FileServer(String filePath){
-		super(4000);
-		if (filePath == ""){
-			filePath=".";
-		}
+	FileServer(){
+		super(4000);	
+		String serverRoot = ClassLoader.getSystemResource("dach/resources").toExternalForm();
+
 		resourceHandler = new ResourceHandler();
 		resourceHandler.setDirectoriesListed(true);
-		resourceHandler.setWelcomeFiles(new String[]{"index.html"});
-		resourceHandler.setResourceBase(filePath);
+		resourceHandler.setResourceBase(serverRoot);
+		
 		this.setHandler(resourceHandler);
 	}
-
 }
