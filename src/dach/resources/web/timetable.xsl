@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:func="http://chojnacki.ws/functions">
-
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:func="http://chojnacki.ws/functions" exclude-result-prefixes="xs func">
+<xsl:output method="xhtml" omit-xml-declaration="yes" />
 <xsl:variable name="loc" select="'../../../..'"/>
 <!-- <xsl:variable name="loc" select="'/root'"/> -->
 
 <xsl:variable name="stops_d" select="doc(concat($loc, '/stops.xml'))" as="document-node()"/>
+<xsl:variable name="dist_d" select="doc(concat($loc, '/distances.xml'))" as="document-node()"/>
 <xsl:key name="stops_key"  match="stops/stop" use="@id"/>
+<xsl:key name="dist_key" match="distance" use="@comp_id"/>
+
 
 <!-- <xsl:function name="func:to_minutes" as="xs:integer"> -->
 <!--     <xsl:variable name="dupa" select="'123'"/>     -->
 <!-- </xsl:function> -->
 <xsl:template match="/">
-  
+
+<xsl:variable name="dist">
+    <xsl:for-each select="$dist_d/distance">
+        <d><xsl:value-of select="'sd'"/></d>
+    </xsl:for-each>
+</xsl:variable>
+
+  <xsl:value-of select="$dist"/>
   <body>  
     <h2>Rozklad jazdy</h2> 
     <table>
@@ -35,11 +46,15 @@
         
          <xsl:for-each select="route/stop">
              <xsl:variable name="stop_id" select="@id"/>
-             <item><xsl:value-of select="key('stops_key',@id, $stops_d)/@name"/></item>
+             <stop><xsl:value-of select="key('stops_key',@id, $stops_d)/@name"/></stop>
+
          </xsl:for-each>
+         
+         
+         
          </xsl:variable>
          <stops><xsl:copy-of select="$something"></xsl:copy-of></stops>
-         <desc><xsl:value-of select="string-join(($something/item), ' -> ')"/></desc>
+         <desc><xsl:value-of select="string-join(($something/stop), ' -> ')"/></desc>
     </xsl:for-each>
     </line>
     </xsl:variable>
