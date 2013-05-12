@@ -10,19 +10,23 @@
 <xsl:key name="stops_key"  match="stops/stop" use="@id"/>
 <xsl:key name="dist_key" match="distance" use="@comp_id"/>
 
+<xsl:variable name="dist">
+    <xsl:for-each select="$dist_d//distances/distance">
+        <distance>
+            <id><xsl:value-of select="string-join((@from-stop, @to-stop), ':')"/></id>
+            <high><xsl:value-of select="@high-traffic"/></high>
+            <low><xsl:value-of select="@low-traffic"/></low>           
+        </distance>
+    </xsl:for-each>
+</xsl:variable>
 
 <!-- <xsl:function name="func:to_minutes" as="xs:integer"> -->
 <!--     <xsl:variable name="dupa" select="'123'"/>     -->
 <!-- </xsl:function> -->
 <xsl:template match="/">
-
-<xsl:variable name="dist">
-    <xsl:for-each select="$dist_d/distance">
-        <d><xsl:value-of select="'sd'"/></d>
-    </xsl:for-each>
-</xsl:variable>
-
-  <xsl:value-of select="$dist"/>
+<!--   <a> -->
+<!--     <xsl:value-of select="$dist/distance"/> -->
+<!--   </a> -->
   <body>  
     <h2>Rozklad jazdy</h2> 
     <table>
