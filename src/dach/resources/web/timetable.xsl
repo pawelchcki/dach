@@ -28,11 +28,9 @@
 </xsl:function>
 
 <xsl:variable name="_tmp_lookup">
-<!--     <node> -->
     <xsl:for-each select="$dist_d//distances/distance">
         <xsl:copy-of select="func:repr_dist(func:create_id(@from-stop, @to-stop), @high-traffic, @low-traffic)"/>
     </xsl:for-each>
-<!--     </node> -->
 </xsl:variable>
 
 <xsl:variable name="_distance_lookup">
@@ -57,9 +55,30 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:for-each>
-    
-
 </xsl:variable>
+
+<xsl:function name="func:recurse_distance">
+    <xsl:param name="route" />
+    <xsl:param name="pos" as="xs:numeric"/>
+    <xsl:variable name="_res">
+	    <xsl:choose>
+	        <xsl:when test="$pos < 2">
+	           <high>0</high>
+	           <low>0</low>
+	        </xsl:when>
+	        <xsl:otherwise>
+	           <xsl:copy-of select="func:recurse_distance($route, $pos -1 )"/>
+	        </xsl:otherwise>
+	    </xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="_l_id" select="func:create_id($pos-1, $pos)"/>
+	<high>
+	   <xsl:value-of select="$_res/high + key('dest_key', $_l_id, $_distance_lookup)/high"/>
+	</high>
+	<low>
+	   <xsl:value-of select="$_res/low + key('dest_key', $_l_id, $_distance_lookup)/low"/>
+	</low>
+</xsl:function>
 
 <!-- <xsl:function name="func:to_minutes" as="xs:integer"> -->
 <!--     <xsl:variable name="dupa" select="'123'"/>     -->
@@ -83,31 +102,30 @@
       </xsl:for-each>
     </table>
    
-   <xsl:variable name="line-helper">
-    <line>
-    <xsl:for-each select="timetable/line">
-        <name><xsl:value-of select="@name"/></name>
-	        <xsl:variable name="something">
-		         <xsl:for-each select="route/stop">
-		             <stop><xsl:value-of select="key('stops_key',@id, $stops_d)/@name"/></stop>
-		         </xsl:for-each>
-	         </xsl:variable>
-	         <xsl:variable name="_t_dist">
-                 <xsl:for-each select="route/stop">
-                    <xsl:if test="position() > 0">
-                        <xsl:variable name="_last" select="position() - 1"/>
-                        <xsl:variable name="_key" select="concat(../stop[$_last]/@id, ':', @id)"/>
-                        <xsl:value-of select="$_key"/>
-                    </xsl:if>
-                    
-                 </xsl:for-each>
-             </xsl:variable>
+    <xsl:variable name="line-helper">
+        <line>
+            <xsl:for-each select="timetable/line">
+                <name><xsl:value-of select="@name"/></name>
+		        <xsl:variable name="something">
+			         <xsl:for-each select="route/stop">
+			             <stop><xsl:value-of select="key('stops_key',@id, $stops_d)/@name"/></stop>
+			         </xsl:for-each>
+		         </xsl:variable>
+		         <xsl:variable name="_t_dist">
+	                 <xsl:for-each select="route/stop">
+	                    <xsl:if test="position() > 0">
+	                        <xsl:variable name="_last" select="position() - 1"/>
+	                        <xsl:variable name="_key" select="concat(../stop[$_last]/@id, ':', @id)"/>
+	                        <xsl:value-of select="$_key"/>
+	                    </xsl:if>
+	                 </xsl:for-each>
+	             </xsl:variable>
           <dupa><xsl:value-of select="$_t_dist"/></dupa>
 	         
          <stops><xsl:copy-of select="$something"></xsl:copy-of></stops>
          <desc><xsl:value-of select="string-join(($something/stop), ' -> ')"/></desc>
-    </xsl:for-each>
-    </line>
+            </xsl:for-each>
+        </line>
     </xsl:variable>
     <xsl:text>
     
